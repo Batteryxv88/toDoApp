@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: start;
+  width: 90%;
+  min-height: 30px;
+  background-color: #82a3a1;
+  margin: 0px auto 20px auto;
+  padding: 10px 0 30px 20px;
+  border-radius: 15px;
+}
+
+.card__title {
+  margin: 0;
+  width: 500px;
+  color: #fff;
+  padding: 5px 20px 8px 10px;
+  margin: 0 0 0 30px;
+  border-radius: 10px;
+}
+
+.card__description {
+  width: 92%;
+  height: auto;
+  padding: 15px 0 20px 10px;
+  margin: 10px 0 0 30px;
+  background-color: #9fc490;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.card__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__is-done {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 16px;
+  margin: 8px 0 0 0;
+  background: url(../UI/Images/checkmark.png);
+  border: 2px solid #011936;
+}
+
+.card__not-done {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 16px;
+  margin: 8px 0 0 0;
+  border: 2px solid #011936;
+}
