@@ -3,24 +3,26 @@ import NewNote from "./components/NewNote/NewNote";
 import { useState, useEffect } from "react";
 import AppContext from "./components/Context/AppContext";
 import Filter from "./components/Filter/Filter";
-
-const notesData = [
-  {
-    id: "a1",
-    title: "By new keyboard",
-    description: "By keyboard on Citilink store",
-    isDone: false,
-  },
-  {
-    id: "a2",
-    title: "Clean a room",
-    description: "Clean a room",
-    isDone: false,
-  },
-];
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "./firebase";
 
 function App() {
-  const [notes, setNotes] = useState(notesData);
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const getTodos = () => {
+      const colRef = collection(db, "todos");
+      onSnapshot(colRef, (snapshort) => {
+        const arr = [];
+        snapshort.docs.forEach((doc) => {
+          arr.push({ ...doc.data(), id: doc.id });
+          setNotes(arr);
+        });
+      });
+    };
+    getTodos();
+  }, []);
+
 
   const addNoteHandler = (notes) => {
     setNotes((prevNotes) => {
@@ -31,9 +33,13 @@ function App() {
   return (
     <AppContext.Provider value={{ notes, setNotes }}>
       <div className="App">
-        <h1 className="App__title">To do list</h1>
-        <NewNote onAddNote={addNoteHandler} />
-        <Filter />
+        <header className="App__header">
+          <h1 className="App__title">To do list</h1>
+        </header>
+        <main className="App__main">
+          <NewNote onAddNote={addNoteHandler} />
+          <Filter />
+        </main>
       </div>
     </AppContext.Provider>
   );

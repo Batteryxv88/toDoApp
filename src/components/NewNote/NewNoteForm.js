@@ -1,36 +1,55 @@
-import { useContext, useState } from "react";
+import { useState } from "react"
 import "./NewNoteForm.css";
-import AppContext from "../Context/AppContext";
-import NoteCards from "../NoteCards/NoteCards";
+import { db, storage } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const NewNoteForm = (props) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredDescription, setEnteredDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [progress, setProgress] = useState(0)
 
-  const ctx = useContext(AppContext);
+  console.log(progress)
 
-  const formSubmitHandler = (evt) => {
+  const formSubmitHandler = async (evt) => {
     evt.preventDefault();
-
-    const noteData = {
-      title: enteredTitle,
-      description: enteredDescription,
-      id: Math.random().toString(),
-      isDone: false,
-    };
-    const data = [...ctx.notes, noteData];
-    ctx.setNotes(data);
     props.onSaveNoteData();
-    setEnteredTitle("");
-    setEnteredDescription("");
+    if (title !== "") {
+      try {
+        await addDoc(collection(db, "todos"), {
+          title,
+          description,
+          isDone: false,
+        });
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+      setTitle("")
+      setDescription("")
+    }
   };
 
   const changeTitleHandler = (evt) => {
-    setEnteredTitle(evt.target.value);
+    setTitle(evt.target.value);
   };
 
   const changeDescriptionHandler = (evt) => {
-    setEnteredDescription(evt.target.value);
+    setDescription(evt.target.value);
+  };
+
+  const addFileHandler = (file) => {
+    if (!file) return;
+    const storageRef = ref(storage, `/files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+    uploadTask.on("state_changed", (snapshot) => {
+      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      setProgress(progress)
+    }, (err) => console.log(err),
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref)
+      .then(url => console.log(url))
+    }
+    )
   };
 
   return (
@@ -41,13 +60,25 @@ const NewNoteForm = (props) => {
             autoFocus
             className="form__input form__input_title"
             onChange={changeTitleHandler}
+            placeholder="Title"
           ></input>
           <textarea
             className="form__input form__input_description"
             onChange={changeDescriptionHandler}
+            placeholder="Description"
           ></textarea>
         </div>
         <div className="form__wrapper">
+          <label className="input-file">
+            <input
+              className="input-file__input"
+              name="file"
+              type="file"
+              onChange={addFileHandler}
+            ></input>
+            <span className="input-file__span">Select file</span>
+            <span>Uploaded {progress} %</span>
+          </label>
           <button className="form__button form__button_submit" type="submit">
             Add note
           </button>

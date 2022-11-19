@@ -1,7 +1,8 @@
 import "./NoteItem.css";
 import { useContext, useState } from "react";
 import AppContext from "../Context/AppContext";
-//var cloneDeep = require("lodash.clonedeep");
+import { updateDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 var _ = require("lodash");
 
@@ -14,7 +15,7 @@ const NoteItem = (props) => {
     setIsDetaildCard(!isDetailedCard);
   };
 
-  const noteDoneHandler = () => {
+  const noteDoneHandler = (evt) => {
     const rex = _.cloneDeep(ctx.notes);
 
     rex.map((note) => {
@@ -26,6 +27,11 @@ const NoteItem = (props) => {
     });
 
     ctx.setNotes(rex);
+
+    const todoRef = doc(db, "todos", props.id);
+    updateDoc(todoRef, {
+      isDone: !props.isDone,
+    });
   };
 
   return (
@@ -41,6 +47,7 @@ const NoteItem = (props) => {
           <h2 className="card__title" onClick={showDetailshandler}>
             {props.title}
           </h2>
+          
         )}
         {isDetailedCard && (
           <div className="card__wrapper">

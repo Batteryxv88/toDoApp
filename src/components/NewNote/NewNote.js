@@ -13,12 +13,12 @@ const NewNote = (props) => {
     setIsEditing(false);
   };
 
-  const saveNoteDataHandler = (enteredNoteData) => {
+  const saveNoteDataHandler = () => {
     setIsEditing(false);
   };
 
   return (
-    <div className="new-note">
+    <section className="new-note">
       {!isEditing && (
         <button className="new-note__button" onClick={startAddNoteHandler}>
           Add new note
@@ -30,7 +30,7 @@ const NewNote = (props) => {
           onSaveNoteData={saveNoteDataHandler}
         />
       )}
-    </div>
+    </section>
   );
 };
 

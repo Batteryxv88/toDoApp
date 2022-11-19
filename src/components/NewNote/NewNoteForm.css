@@ -1,5 +1,5 @@
 .note-form {
-  width: 80%;
+  width: 90%;
   background-color: #9fc490;
   padding: 30px 30px 30px;
   border-radius: 15px;
@@ -10,16 +10,22 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: auto;
 }
 
 .form__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  width: 100%;
+}
+
+.form__wrapper:last-of-type {
+  margin-left: 100px;
 }
 
 .form__input {
-  width: 500px;
+  width: 100%;
   border: 2px solid #011936;
   margin: 0 0 20px 0;
   border-radius: 10px;
@@ -39,7 +45,7 @@
 }
 
 .form__button {
-  width: 300px;
+  width: 100%;
   height: 60px;
   border-radius: 10px;
   border: none;
@@ -53,4 +59,106 @@
   height: 50px;
   background-color: #82a3a1;
   border: 2px solid #011936;
+}
+
+.input-file {
+    position: relative;
+    display: inline-block;
+    width: 115px;
+    height: 40px;
+    margin: 0 0 95px;
+}
+
+.input-file__span {
+  position: relative;
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 16px;
+	vertical-align: middle;
+	color: #fff;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #82a3a1;
+	line-height: 16px;
+	height: 40px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: 2px solid #011936;
+	margin: 0;
+}
+
+.input-file__input {
+  position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+
+@media screen and (max-width: 1280px) {
+  .form__wrapper:last-of-type {
+    margin-left: 50px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .form__wrapper:last-of-type {
+    width: 70%;
+  }
+
+  .form__button {
+    height: 45px;
+    font-size: 22px;
+  }
+
+  .form__input_title {
+    height: 35px;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .note-form {
+    padding: 25px 25px 15px;
+  }
+
+  .form__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .form__wrapper:last-of-type {
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+  }
+
+  .form__button {
+    width: 70%;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .form__input {
+    width: 97%;
+    margin: 0 auto 20px;
+    padding: 2px 5px 2px 5px;
+  }
+
+  .form__button_cansel {
+    height: 35px;
+  }
+
 }

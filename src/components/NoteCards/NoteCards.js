@@ -4,7 +4,7 @@ import NoteItem from "./NoteItem";
 const NoteCards = (props) => {
   return (
     <div className="note-cards">
-      {props.allItems.length <= 0 && <h1 className="no-items">No items</h1>}
+      {props.allItems.length <= 0 && <h2 className="no-items">No items</h2>}
       {props.allItems.length >= 1 &&
         props.allItems.map((note) => (
           <NoteItem
