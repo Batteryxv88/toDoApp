@@ -21,7 +21,7 @@
 }
 
 .card__description {
-  width: 92%;
+  width: 80%;
   height: auto;
   padding: 15px 0 20px 10px;
   margin: 10px 0 0 30px;
@@ -31,6 +31,7 @@
 }
 
 .card__wrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -42,6 +43,7 @@
   border-radius: 16px;
   margin: 8px 0 0 0;
   background: url(../UI/Images/checkmark.png);
+  background-size: contain;
   border: 2px solid #011936;
 }
 
@@ -52,4 +54,41 @@
   border-radius: 16px;
   margin: 8px 0 0 0;
   border: 2px solid #011936;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 95%;
+    font-size: 12px;
+    min-height: 15px;
+    padding: 0px 0 10px 10px;
+    margin: 0px auto 10px auto;
+    border-radius: 8px;
+  }
+
+  .card__is-done {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin: 11px 0 0 0;
+  }
+
+  .card__not-done {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin: 11px 0 0 0;
+  }
+
+  .card__title {
+    margin: 0;
+    width: 60%;
+  }
+
+  .card__description {
+    margin: 0 0 0 20px;
+    padding: 5px 0 5px 10px;
+    line-height: 12px;
+    border-radius: 5px;
+  }
 }

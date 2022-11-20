@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import AppContext from "../Context/AppContext";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
+import dayjs from "dayjs";
 
 var _ = require("lodash");
 
@@ -33,6 +34,8 @@ const NoteItem = (props) => {
       isDone: !props.isDone,
     });
   };
+
+  console.log(dayjs().format())
 
   return (
     <div className="card">

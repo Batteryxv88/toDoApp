@@ -1,52 +1,5 @@
-.filter {
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 auto;
-  color: #fff;
-}
-
-.filter__left-notes {
-  width: 100px;
-}
-
-.filter__wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 260px;
-  justify-content: space-between;
-}
-
-.filter__clear-complete {
-  cursor: pointer;
-}
-
-.filter__filter {
-  cursor: pointer;
-  width: 80px;
-  text-align: center;
-}
-
-.filter__current {
-  border: 1px solid #9fc490;
-  border-radius: 7px;
-}
-
-@media screen and (max-width: 768px) {
-  .filter {
-    font-size: 14px;
-  }
-
-  .filter__wrapper {
-    width: 220px;
-  }
-}
-
-
-
 .filter-small {
-  max-width: 85%;
+  max-width: 95%;
   align-items: center;
   margin: 0 auto;
   display: none;
@@ -91,9 +44,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .filter {
-    display: none;
-  }
 
   .filter-small {
     display: flex;

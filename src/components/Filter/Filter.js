@@ -1,4 +1,3 @@
-import "./Filter.css";
 import FilterItemLarge from "./FilterItemLarge";
 import FilterItemSmall from "./FilterItemSmall";
 import AppContext from "../Context/AppContext";

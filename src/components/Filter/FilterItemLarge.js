@@ -1,10 +1,10 @@
-import "./Filter.css";
+import "./FilterItemLarge.css";
 
 const FilterItemLarge = (props) => {
 
 
   return ( 
-    <section className="filter">
+    <section className="filter-large">
         <p className="filter__left-notes">
           {props.leftItems.length >= 1 ? props.leftItems.length : "No"} items left
         </p>

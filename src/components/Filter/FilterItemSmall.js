@@ -1,4 +1,4 @@
-import "./Filter.css";
+import "./FilterItemSmall.css";
 
 const FilterItemSmall = (props) => {
   return (

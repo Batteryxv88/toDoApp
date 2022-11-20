@@ -14,3 +14,10 @@
   text-align: center;
   padding: 100px 0 0 0;
 }
+
+
+@media screen and (max-width: 768px) {
+  .note-cards {
+    width: 100%;
+  }
+}

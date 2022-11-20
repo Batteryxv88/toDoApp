@@ -47,7 +47,7 @@
 @media screen and (max-width: 768px) {
 
   .App {
-    padding: 0 30px 0 30px;
+    padding: 0 10px 0 10px;
   }
 
   .App__title {
