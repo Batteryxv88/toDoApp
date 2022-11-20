@@ -85,7 +85,6 @@ const NewNoteForm = (props) => {
               onChange={addFileHandler}
             ></input>
             <span className="input-file__span">Select file</span>
-            <span>Uploaded {progress} %</span>
           </label>
           <button className="form__button form__button_submit" type="submit">
             Add note

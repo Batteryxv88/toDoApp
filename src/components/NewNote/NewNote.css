@@ -20,9 +20,20 @@
 }
 
 @media screen and (max-width: 768px) {
+  .new-note {
+    justify-content: center;
+    padding: 10px 0 20px 0;
+  }
+
   .new-note__button {
     height: 40px;
     width: 220px;
     font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .new-note {
+    max-width: 100%;
   }
 }
