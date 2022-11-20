@@ -1,34 +1,21 @@
 import "./NoteItem.css";
-import { useContext, useState } from "react";
-import AppContext from "../Context/AppContext";
+import { useState } from "react";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import dayjs from "dayjs";
 
-var _ = require("lodash");
-
 const NoteItem = (props) => {
+
+  /** State for open close detail information of notes*/
   const [isDetailedCard, setIsDetaildCard] = useState(false);
 
-  const ctx = useContext(AppContext);
-
+  /** Toggle state */
   const showDetailshandler = () => {
     setIsDetaildCard(!isDetailedCard);
   };
 
-  const noteDoneHandler = (evt) => {
-    const rex = _.cloneDeep(ctx.notes);
-
-    rex.map((note) => {
-      if (note.id === props.id) {
-        return (note.isDone = !note.isDone);
-      } else {
-        return (note.isDone = note.isDone);
-      }
-    });
-
-    ctx.setNotes(rex);
-
+  /** Sending update isDone key to firebase */
+  const noteDoneHandler = () => {
     const todoRef = doc(db, "todos", props.id);
     updateDoc(todoRef, {
       isDone: !props.isDone,

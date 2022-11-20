@@ -2,34 +2,28 @@ import "./NewNote.css";
 import { useState } from "react";
 import NewNoteForm from "./NewNoteForm";
 
-const NewNote = (props) => {
-  const [isEditing, setIsEditing] = useState(false);
+const NewNote = () => {
+  /** State for open close adding form*/
+  const [isAdding, setIsAdding] = useState(false);
 
+  /** Set state to true (open form) */
   const startAddNoteHandler = () => {
-    setIsEditing(true);
+    setIsAdding(true);
   };
 
+  /** Set state to false (close form) */
   const stopAddNewNote = () => {
-    setIsEditing(false);
-  };
-
-  const saveNoteDataHandler = () => {
-    setIsEditing(false);
+    setIsAdding(false);
   };
 
   return (
     <section className="new-note">
-      {!isEditing && (
+      {!isAdding && (
         <button className="new-note__button" onClick={startAddNoteHandler}>
           Add new note
         </button>
       )}
-      {isEditing && (
-        <NewNoteForm
-          onCansel={stopAddNewNote}
-          onSaveNoteData={saveNoteDataHandler}
-        />
-      )}
+      {isAdding && <NewNoteForm onCansel={stopAddNewNote} />}
     </section>
   );
 };

@@ -6,6 +6,7 @@ import NoteCards from "../NoteCards/NoteCards";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
+/** A function changing the state relative of the filter*/
 const filterReducer = (state, action) => {
   if (action.type === "all") {
     return {
@@ -34,46 +35,54 @@ const filterReducer = (state, action) => {
 };
 
 const Filter = () => {
+
   const ctx = useContext(AppContext);
 
+  /** Reducer state of filter
+   * @param {array} items
+   */
   const [items, dispatchItems] = useReducer(filterReducer, {
     allItems: true,
     activeItems: false,
     completedItems: false,
   });
 
+  /** Distructuring @param items */
   const {
     allItems: allItems,
     activeItems: activeItems,
     completedItems: completedItems,
   } = items;
 
-  const leftItems = ctx.notes.filter((val) => {
-    const filteredTtems = val.isDone === false;
-    return filteredTtems;
-  });
-
+  /** A function of filtering uncompleted notes*/
   const activeItemsArr = ctx.notes.filter((val) => {
     return val.isDone === false;
   });
 
+  /** A function of filtering completed notes*/
   const completedItemsArr = ctx.notes.filter((val) => {
     return val.isDone === true;
   });
 
+  /** Change state handler, filtered all notes*/
   const setAllItemsHandler = () => {
     dispatchItems({ type: "all", val: true });
   };
 
+  /** Change state handler, filtered active notes*/
   const setActiveItemsHandler = () => {
     dispatchItems({ type: "active", val: true });
   };
 
+/** Change state handler, filtered completed notes*/
   const setCompletedItemsHandler = () => {
     dispatchItems({ type: "complited", val: true });
   };
 
-  const clearCompletedHandler = (evt) => {
+  /** Clear completed notes handler. Setting the local state relative 
+  * of filtered notes, sending changes to the firebase.
+  */
+  const clearCompletedHandler = () => {
     const filteredItems = ctx.notes.filter((val) => {
       return val.isDone === false;
     });
@@ -95,7 +104,7 @@ const Filter = () => {
         setActiveItemsHandler={setActiveItemsHandler}
         setCompletedItemsHandler={setCompletedItemsHandler}
         clearCompletedHandler={clearCompletedHandler}
-        leftItems={leftItems}
+        leftItems={completedItemsArr}
         allItems={allItems}
         completedItems={completedItems}
         activeItems={activeItems}
@@ -105,7 +114,7 @@ const Filter = () => {
         setActiveItemsHandler={setActiveItemsHandler}
         setCompletedItemsHandler={setCompletedItemsHandler}
         clearCompletedHandler={clearCompletedHandler}
-        leftItems={leftItems}
+        leftItems={completedItemsArr}
         allItems={allItems}
         completedItems={completedItems}
         activeItems={activeItems}

@@ -1,19 +1,21 @@
-import { useState } from "react"
+import { useState } from "react";
 import "./NewNoteForm.css";
 import { db, storage } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const NewNoteForm = (props) => {
+  /** Setting title input value to state */
   const [title, setTitle] = useState("");
+
+  /** Setting description input value to state */
   const [description, setDescription] = useState("");
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(0);
 
-  console.log(progress)
-
+  /** Submit form handler. Send data to firebase, clear input states. */
   const formSubmitHandler = async (evt) => {
     evt.preventDefault();
-    props.onSaveNoteData();
+    props.onCansel();
     if (title !== "") {
       try {
         await addDoc(collection(db, "todos"), {
@@ -24,32 +26,38 @@ const NewNoteForm = (props) => {
       } catch (e) {
         console.error("Error adding document: ", e);
       }
-      setTitle("")
-      setDescription("")
+      setTitle("");
+      setDescription("");
     }
   };
 
+  /** Set title value from input to state */
   const changeTitleHandler = (evt) => {
     setTitle(evt.target.value);
   };
 
+  /** Set description value from input to state */
   const changeDescriptionHandler = (evt) => {
     setDescription(evt.target.value);
   };
 
   const addFileHandler = (file) => {
     if (!file) return;
-    const storageRef = ref(storage, `/files/${file.name}`)
-    const uploadTask = uploadBytesResumable(storageRef, file)
-    uploadTask.on("state_changed", (snapshot) => {
-      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      setProgress(progress)
-    }, (err) => console.log(err),
-    () => {
-      getDownloadURL(uploadTask.snapshot.ref)
-      .then(url => console.log(url))
-    }
-    )
+    const storageRef = ref(storage, `/files/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (err) => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
+      }
+    );
   };
 
   return (

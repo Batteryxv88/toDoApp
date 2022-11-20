@@ -6,8 +6,16 @@ import Filter from "./components/Filter/Filter";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase";
 
+/** @module App */
+
 function App() {
+  /** Todos array state
+   * @param {array} notes - array todos
+   */
+
   const [notes, setNotes] = useState([]);
+
+  /** Automatic receive array and set to state @param notes */
 
   useEffect(() => {
     const getTodos = () => {
@@ -23,13 +31,6 @@ function App() {
     getTodos();
   }, []);
 
-
-  const addNoteHandler = (notes) => {
-    setNotes((prevNotes) => {
-      return [notes, ...prevNotes];
-    });
-  };
-
   return (
     <AppContext.Provider value={{ notes, setNotes }}>
       <div className="App">
@@ -37,7 +38,7 @@ function App() {
           <h1 className="App__title">To do list</h1>
         </header>
         <main className="App__main">
-          <NewNote onAddNote={addNoteHandler} />
+          <NewNote />
           <Filter />
         </main>
       </div>
