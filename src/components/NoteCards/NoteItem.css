@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: start;
+  justify-content: space-between;
   width: 90%;
   min-height: 30px;
   background-color: #82a3a1;
   margin: 0px auto 20px auto;
-  padding: 10px 0 30px 20px;
+  padding: 10px 10px 30px 20px;
   border-radius: 15px;
+  border: 2px solid #011936;
 }
 
 .card__title {
@@ -30,10 +31,50 @@
   color: #fff;
 }
 
+.card__date {
+  width: 70px;
+  height: 60px;
+  margin: 0;
+  color: #011936;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #011936;
+  background-color: #9fc490;
+  border-radius: 7px;
+  padding: 2px;
+}
+
+.card__date_month {
+  font-size: 12px;
+  line-height: 12px;
+  margin: 0 auto;
+}
+
+.card__date_year {
+  font-size: 14px;
+  line-height: 14px;
+  margin: 0 auto;
+}
+
+.card__date_day {
+  font-size: 28px;
+  line-height: 28px;
+  margin: 0 auto;
+}
+
 .card__wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.card__box {
+  width: 83%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .card__is-done {
@@ -61,7 +102,7 @@
     width: 95%;
     font-size: 12px;
     min-height: 15px;
-    padding: 0px 0 10px 10px;
+    padding: 5px 5px 10px 10px;
     margin: 0px auto 10px auto;
     border-radius: 8px;
   }
@@ -71,6 +112,10 @@
     height: 13px;
     border-radius: 10px;
     margin: 11px 0 0 0;
+  }
+
+  .card__date {
+    border-radius: 4px;
   }
 
   .card__not-done {
@@ -95,5 +140,34 @@
 
   .card__wrapper {
     width: 90%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .card {
+    border: 1px solid #011936;
+  }
+
+  .card__box {
+    width: 77%;
+  }
+
+  .card__date {
+    height: 30px;
+    width: 50px;
+  }
+
+  .card__date_year {
+    display: none;
+  }
+
+  .card__date_day {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  .card__date_month {
+    font-size: 10px;
+    line-height: 10px;
   }
 }

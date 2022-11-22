@@ -13,6 +13,7 @@ const NoteCards = (props) => {
             key={note.id}
             isDone={note.isDone}
             id={note.id}
+            date={note.date}
           />
         ))}
     </div>

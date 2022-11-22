@@ -3,6 +3,7 @@ import "./NewNoteForm.css";
 import { db, storage } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import dayjs from "dayjs";
 
 const NewNoteForm = (props) => {
   /** Setting title input value to state */
@@ -16,12 +17,14 @@ const NewNoteForm = (props) => {
   const formSubmitHandler = async (evt) => {
     evt.preventDefault();
     props.onCansel();
+    const date = new Date(dayjs().format())
     if (title !== "") {
       try {
         await addDoc(collection(db, "todos"), {
           title,
           description,
           isDone: false,
+          date: date.toDateString()
         });
       } catch (e) {
         console.error("Error adding document: ", e);
