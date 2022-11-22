@@ -104,7 +104,7 @@ const Filter = () => {
         setActiveItemsHandler={setActiveItemsHandler}
         setCompletedItemsHandler={setCompletedItemsHandler}
         clearCompletedHandler={clearCompletedHandler}
-        leftItems={completedItemsArr}
+        leftItems={activeItemsArr}
         allItems={allItems}
         completedItems={completedItems}
         activeItems={activeItems}
@@ -114,7 +114,7 @@ const Filter = () => {
         setActiveItemsHandler={setActiveItemsHandler}
         setCompletedItemsHandler={setCompletedItemsHandler}
         clearCompletedHandler={clearCompletedHandler}
-        leftItems={completedItemsArr}
+        leftItems={activeItemsArr}
         allItems={allItems}
         completedItems={completedItems}
         activeItems={activeItems}
