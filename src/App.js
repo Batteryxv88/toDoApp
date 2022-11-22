@@ -18,9 +18,10 @@ function App() {
   /** Automatic receive array and set to state @param notes */
 
   useEffect(() => {
-    const getTodos = () => {
+    const getTodos = async () => {
       const colRef = collection(db, "todos");
-      onSnapshot(colRef, (snapshort) => {
+      setNotes([12]);  //[{ download: true, id: 789 }]
+      await onSnapshot(colRef, (snapshort) => {
         const arr = [];
         snapshort.docs.forEach((doc) => {
           arr.push({ ...doc.data(), id: doc.id });
@@ -30,6 +31,7 @@ function App() {
     };
     getTodos();
   }, []);
+
 
   return (
     <AppContext.Provider value={{ notes, setNotes }}>

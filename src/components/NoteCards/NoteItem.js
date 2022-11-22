@@ -28,7 +28,6 @@ const NoteItem = (props) => {
   
 
 
-
   return (
     <div className="card">
       {props.isDone && (
