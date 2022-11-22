@@ -32,6 +32,7 @@ function App() {
     getTodos();
   }, []);
 
+  
 
   return (
     <AppContext.Provider value={{ notes, setNotes }}>
